@@ -107,6 +107,7 @@ body{
     width: 100%;
     color: white;
     display: flex;
+    text-align: center;
     flex-wrap: wrap;
     row-gap: 5px;
     margin-bottom: 50px;
