@@ -100,7 +100,7 @@ async function timerApp (){
 
        setInterval(getTimer, 1000, timeDate, secNumEl, hourNumEl, dayNumEl, minNumEl);
 
-        
+       getTimeUp()
     }
     
 }
@@ -144,12 +144,70 @@ function getTimer(timeDate, secNumEl, hourNumEl, dayNumEl, minNumEl) {
     hourNumEl.textContent = formatNum(hours);
     minNumEl.textContent = formatNum(mins)
     secNumEl.innerText = formatNum(secs);
+
+    // console.log(timerCont)
+
+    if(hours <= 0 && remainDays <= 0 && mins <= 0 && secs <= 0){
+        dayNumEl.textContent = "00";
+        hourNumEl.textContent = "00";
+        minNumEl.textContent = "00";
+        secNumEl.textContent= "00";
+    }
 }
 
+// function to format numbers
 function formatNum(num){
     return num > 9 ? num : `0${num}`;
 }
 
+// function to create falling cards
+function sprayColoredCards(cont){
+    const triangle = document.createElement("div");
+    triangle.classList.add("triangle");
+    const star = document.createElement("div");
+    star.classList.add("star")
+    const parallel = document.createElement("div");
+    parallel.classList.add("parallel");
+
+    triangle.style.left = `${Math.floor(Math.random() * 100)}%`;
+    triangle.style.animationDuration = Math.random() * 2.9 + 10 + "s";
+
+    star.style.left = `${Math.floor(Math.random() * 100)}%`;
+    star.style.animationDuration = Math.random() * 2.9 + 10 + "s";
+
+    parallel.style.left = `${Math.floor(Math.random() * 100)}%`;
+    parallel.style.animationDuration = Math.random() * 2.9 + 10 + "s";
+
+    cont.append(triangle, star, parallel);
+
+    setTimeout( () => {
+        cont.removeChild(triangle);
+        cont.removeChild(star);
+        cont.removeChild(parallel);
+    }, 17000)
+}
+
+// function get timeup cont
+function getTimeUp(){
+
+    const containers = document.querySelectorAll(".time-cont .timer .secs .secNum");
+
+    
+    let contArray = [];
+    
+    containers.forEach( cont => {
+        if(cont.innerText <= 0){
+            contArray.push(cont.parentElement.parentElement.parentElement)
+        }
+    })
+
+    contArray.forEach( cont => {
+        var stopper = setInterval(sprayColoredCards, 2000, cont);
+        setTimeout( () => {
+            clearInterval(stopper);
+        }, 10000)
+    })
+}
 
 // add new timer logic
 const addTimer = document.querySelector("#addTimer");

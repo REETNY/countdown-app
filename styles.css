@@ -134,6 +134,7 @@ body{
 .time-cont{
     width: 300px;
     height: 300px;
+    overflow: hidden;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -211,5 +212,41 @@ span{
     .app-content{
         justify-content: flex-start;
         width: 96%;
+    }
+}
+
+
+
+/* animated cards */
+.triangle, .circle, .star, .square, .parallel{
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: -20px;
+    z-index: 9;
+    animation: fallingCard ease-in-out;
+}
+
+.triangle{
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    background: yellowgreen;
+}
+
+.star{
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    background: pink;
+}
+
+.parallel{
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    background: blueviolet;
+}
+
+
+/* animation */
+@keyframes fallingCard {
+    100%{
+        opacity: 0;
+        transform: translateY(300px)
     }
 }
