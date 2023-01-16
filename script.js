@@ -100,7 +100,7 @@ async function timerApp (){
 
        setInterval(getTimer, 1000, timeDate, secNumEl, hourNumEl, dayNumEl, minNumEl);
 
-       getTimeUp()
+       getTimeUp();
     }
     
 }
@@ -152,6 +152,7 @@ function getTimer(timeDate, secNumEl, hourNumEl, dayNumEl, minNumEl) {
         hourNumEl.textContent = "00";
         minNumEl.textContent = "00";
         secNumEl.textContent= "00";
+        
     }
 }
 
@@ -208,6 +209,7 @@ function getTimeUp(){
         }, 10000)
     })
 }
+
 
 // add new timer logic
 const addTimer = document.querySelector("#addTimer");
