@@ -10,6 +10,19 @@ userName.addEventListener("change", (e) => {
     localStorage.setItem("user", e.target.value);
 })
 
+const select_currentDate = () => {
+    const standard_time = new Date().toISOString();
+    let format = standard_time;
+    let newFormat;
+    if(format.length > 18){
+        newFormat = format.slice(0,19);
+    }
+    var input = form.children[4];
+    input.setAttribute('min', newFormat);
+}
+
+select_currentDate()
+
 let userId = localStorage.getItem("user") || "";
 userName.value = userId;
 
