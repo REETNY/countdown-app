@@ -1,6 +1,7 @@
 const appCont = document.querySelector(".app-content");
 const form = document.querySelector("#form");
 const submit = document.querySelector("#sub");
+const welcomeMessage = document.querySelector(".welcome");
 const timerName = document.querySelector("#timerName");
 const timerDate = document.querySelector("#timerDate");
 const body = document.body;
@@ -9,7 +10,14 @@ userName.addEventListener("change", (e) => {
     localStorage.setItem("user", e.target.value);
 })
 
-userName.value = localStorage.getItem("user") || "";
+let userId = localStorage.getItem("user") || "";
+userName.value = userId;
+
+if(userId){
+    welcomeMessage.innerText = `Welcome Back`
+}else{
+    welcomeMessage.innerText = `Welcome`;
+}
 
 
 form.addEventListener("submit", (e) => {
@@ -28,6 +36,8 @@ form.addEventListener("submit", (e) => {
 
     addDateToLS(datas);
     e.target.reset();
+    form.style.transform = `translateY(-100vh)`;
+    body.style.overflow = `auto`;
 })
 
 // check if there is anything in the local and start the timer or not
@@ -221,12 +231,6 @@ addTimer.addEventListener("click", (e) => {
 const removeOverFlow = document.querySelector(".removeOverFlow");
 removeOverFlow.addEventListener("click", () => {
     form.style.transform = `translateY(-100vh)`;
-    body.style.overflow = `auto`;
-})
-
-submit.addEventListener("click", () => {
-    form.style.transform = `translateY(-100vh)`;
-    appCont.innerHTML = ``;
     body.style.overflow = `auto`;
 })
 
