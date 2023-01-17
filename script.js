@@ -13,9 +13,10 @@ userName.addEventListener("change", (e) => {
 const select_currentDate = () => {
     const standard_time = new Date().toISOString();
     let format = standard_time;
+
     let newFormat;
     if(format.length > 18){
-        newFormat = format.slice(0,19);
+        newFormat = format.slice(0,16);
     }
     var input = form.children[4];
     input.setAttribute('min', newFormat);
