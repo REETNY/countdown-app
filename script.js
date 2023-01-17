@@ -5,7 +5,6 @@ const timerName = document.querySelector("#timerName");
 const timerDate = document.querySelector("#timerDate");
 const body = document.body;
 const userName = document.querySelector("#userName");
-
 userName.addEventListener("change", (e) => {
     localStorage.setItem("user", e.target.value);
 })
@@ -216,16 +215,19 @@ const addTimer = document.querySelector("#addTimer");
 addTimer.addEventListener("click", (e) => {
     form.style.transform = `translateY(0vh)`;
     form.style.transition = `transform 1s ease-in-out`
+    body.style.overflow = `hidden`;
 })
 
 const removeOverFlow = document.querySelector(".removeOverFlow");
 removeOverFlow.addEventListener("click", () => {
     form.style.transform = `translateY(-100vh)`;
+    body.style.overflow = `auto`;
 })
 
 submit.addEventListener("click", () => {
     form.style.transform = `translateY(-100vh)`;
     appCont.innerHTML = ``;
+    body.style.overflow = `auto`;
 })
 
 
