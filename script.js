@@ -6,6 +6,10 @@ const timerName = document.querySelector("#timerName");
 const timerDate = document.querySelector("#timerDate");
 const body = document.body;
 const userName = document.querySelector("#userName");
+
+//images array container
+let bGArray = ["github.jpg", "github2.jpg", "github3.jpg", "github4.jpg", "github5.jpg"]
+
 userName.addEventListener("change", (e) => {
     localStorage.setItem("user", e.target.value);
 })
@@ -34,7 +38,7 @@ if(userId){
 }
 
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async(e) => {
     e.preventDefault();
 
     
@@ -46,6 +50,7 @@ form.addEventListener("submit", (e) => {
     const datas = {
         date: userDate,
         content: userTimerName,
+        backDrop: await getBackground(userTimerName)
     }
 
     addDateToLS(datas);
@@ -59,7 +64,7 @@ window.addEventListener("load", () => {
     checkLs();
 })
 
-async function timerApp (){
+function timerApp (){
     appCont.innerHTML = ``;
     const datas = getDateFromLs();
 
@@ -67,8 +72,7 @@ async function timerApp (){
         const timerCont = document.createElement("div");
         timerCont.classList.add("time-cont");
 
-        const backUrl = await getBackground(datas[i].content);
-        timerCont.style.background = `url(${backUrl})`;
+        timerCont.style.background = `url(${datas[i].backDrop})`;
         timerCont.style.backgroundPosition = 'center';
         timerCont.style.backgroundSize = "cover";
         timerCont.style.backgroundRepeat = "no-repeat";
@@ -123,7 +127,11 @@ async function timerApp (){
 
        setInterval(getTimer, 1000, timeDate, secNumEl, hourNumEl, dayNumEl, minNumEl);
 
-       getTimeUp();
+        timerCont.addEventListener("click", () => {
+            if(secNumEl.textContent <= 0 && hourNumEl.textContent <= 0 && dayNumEl.textContent <= 0 && minNumEl.textContent <= 0){
+                getTimeUp(timerCont)
+            }
+       })
     }
     
 }
@@ -212,25 +220,13 @@ function sprayColoredCards(cont){
 }
 
 // function get timeup cont
-function getTimeUp(){
+function getTimeUp(cont){
 
-    const containers = document.querySelectorAll(".time-cont .timer .secs .secNum");
+    var stopper = setInterval(sprayColoredCards, 2000, cont);
+    setTimeout( () => {
+        clearInterval(stopper);
+    }, 10000)
 
-    
-    let contArray = [];
-    
-    containers.forEach( cont => {
-        if(cont.innerText <= 0){
-            contArray.push(cont.parentElement.parentElement.parentElement)
-        }
-    })
-
-    contArray.forEach( cont => {
-        var stopper = setInterval(sprayColoredCards, 2000, cont);
-        setTimeout( () => {
-            clearInterval(stopper);
-        }, 10000)
-    })
 }
 
 
@@ -259,9 +255,13 @@ function checkLs() {
 
 // call api to get random image
 async function getBackground(text){
-    const myKey = `D5Uuj8BTp5wUzFEBuZ2hBxrN9M6op4MyZHS3puOwCO0`;
-    const serverResponse = await fetch(`https://api.unsplash.com/search/photos?query=${text}&client_id=`+myKey);
-    const resp = await serverResponse.json();
-    const data = resp.results[0].urls.small;
-    return(data);
+    try{
+        const myKey = `D5Uuj8BTp5wUzFEBuZ2hBxrN9M6op4MyZHS3puOwCO0`;
+        const serverResponse = await fetch(`https://api.unsplash.com/search/photos?query=${text}&client_id=`+myKey);
+        const resp = await serverResponse.json();
+        const data = resp.results[0].urls.small;
+        return(data);
+    }catch{
+        return (`imgs/BG/${bGArray[Math.floor(Math.random() * bGArray.length)]}`)
+    }
 }
