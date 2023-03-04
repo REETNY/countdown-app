@@ -251,7 +251,15 @@ function checkLs() {
     data ? timerApp() : "";
 }
 
-
+// check for a submit click
+submit.addEventListener("click", (e) => {
+    e.target.disabled = true;
+    e.target.background = `rgb(153, 82, 106)`;
+    setTimeout( () => {
+        e.target.disabled = false;
+        e.target.background = `pink`;
+    }, 3000)
+})
 
 // call api to get random image
 async function getBackground(text){
