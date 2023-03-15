@@ -183,7 +183,7 @@ body{
     -webkit-background-clip: text;
     -webkit-fill-text-color : transparent;
     /* animation: movingColor 1s linear infinite; */
-    background: linear-gradient(-45deg, #e24f22, #c4205f, #1590bd, #19b994);
+    background: linear-gradient(-45deg, rgb(226, 79, 34), rgb(196, 32, 95), rgb(21, 144, 189), rgb(25, 185, 148));
 	background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
     z-index: 3;
@@ -194,15 +194,6 @@ body{
     grid-template-columns: repeat(4, 1fr);
     justify-content: center;
     align-items: center;
-    color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-fill-text-color : transparent;
-    /* animation: movingColor 1s linear infinite; */
-    background: linear-gradient(-45deg, #c7390e, #af2d5f, #0788b8, #119778);
-	background-size: 400% 400%;
-	animation: gradient 15s ease infinite;
-    z-index: 3;
 }
 
 span{
@@ -218,12 +209,26 @@ span{
     font-weight: 700;
     font-size: 25px;
     color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-fill-text-color : transparent;
+    /* animation: movingColor 1s linear infinite; */
+    background: linear-gradient(-45deg, rgb(199, 57, 14), rgb(175, 45, 95), rgb(7, 136, 184), rgb(17, 151, 120));
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
     z-index: 3;
 }
 
 
 .dayEl, .hourEl, .minEl, .secEl{
     color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-fill-text-color : transparent;
+    /* animation: movingColor 1s linear infinite; */
+    background: linear-gradient(-45deg, rgb(199, 57, 14), rgb(175, 45, 95), rgb(7, 136, 184), rgb(17, 151, 120));
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
     z-index: 3;
 }
 

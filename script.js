@@ -38,25 +38,9 @@ if(userId){
 }
 
 
-form.addEventListener("submit", async(e) => {
+form.addEventListener("submit", (e) => {
     e.preventDefault();
-
-    
-    let userDate = timerDate.value;
-    let userTimerName = timerName.value;
-
-    if(userDate === '' || userTimerName === "")return;
-
-    const datas = {
-        date: userDate,
-        content: userTimerName,
-        backDrop: await getBackground(userTimerName)
-    }
-
-    addDateToLS(datas);
-    e.target.reset();
-    form.style.transform = `translateY(-100vh)`;
-    body.style.overflow = `auto`;
+    form.reset();
 })
 
 // check if there is anything in the local and start the timer or not
@@ -252,7 +236,24 @@ function checkLs() {
 }
 
 // check for a submit click
-submit.addEventListener("click", (e) => {
+submit.addEventListener("click", async(e) => {
+
+    
+    let userDate = timerDate.value;
+    let userTimerName = timerName.value;
+    
+    if(userDate === '' || userTimerName === "")return;
+
+    const datas = {
+        date: userDate,
+        content: userTimerName,
+        backDrop: await getBackground(userTimerName)
+    }
+
+    addDateToLS(datas);
+    form.style.transform = `translateY(-100vh)`;
+    body.style.overflow = `auto`;
+
     e.target.disabled = true;
     e.target.background = `rgb(153, 82, 106)`;
     setTimeout( () => {
