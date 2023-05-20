@@ -5,9 +5,13 @@ const welcomeMessage = document.querySelector(".welcome");
 const timerName = document.querySelector("#timerName");
 const timerDate = document.querySelector("#timerDate");
 const body = document.body;
+const htmlTag = document.querySelector("html")
 const userName = document.querySelector("#userName");
 
-const cssLoader = document.querySelector(".loading")
+const cssLoader = document.querySelector(".loading");
+const currentYearEl = document.querySelector(".currentYear");
+
+currentYearEl.innerText = `${new Date().getFullYear()}`
 
 //images array container
 let bGArray = ["github.jpg", "github2.jpg", "github3.jpg", "github4.jpg", "github5.jpg"]
@@ -222,12 +226,14 @@ addTimer.addEventListener("click", (e) => {
     form.style.transform = `translateY(0vh)`;
     form.style.transition = `transform 1s ease-in-out`
     body.style.overflow = `hidden`;
+    htmlTag.style.overflowY = "hidden"
 })
 
 const removeOverFlow = document.querySelector(".removeOverFlow");
 removeOverFlow.addEventListener("click", () => {
     form.style.transform = `translateY(-100vh)`;
     body.style.overflow = `auto`;
+    htmlTag.style.overflowY = "auto"
 })
 
 
@@ -237,10 +243,23 @@ function checkLs() {
     data ? timerApp() : "";
 }
 
+function loader(bool){
+    if(bool){
+        cssLoader.style.top = `0vh`
+        body.style.overflowY = `hidden`
+        htmlTag.style.overflowY = "hidden"
+        form.style.transform = `translateY(-100vh)`;
+    }else{
+        cssLoader.style.top = `-100vh`
+        body.style.overflowY = `auto`
+        htmlTag.style.overflowY = "auto"
+    }
+}
+
+console.log(htmlTag)
+
 // check for a submit click
 submit.addEventListener("click", async(e) => {
-
-    cssLoader.style.top = `0vh`
     
     let userDate = timerDate.value;
     let userTimerName = timerName.value;
@@ -253,16 +272,15 @@ submit.addEventListener("click", async(e) => {
         backDrop: await getBackground(userTimerName)
     }
 
-
+    
+    loader(true)
 
     addDateToLS(datas);
     setTimeout(
         () => {
-            cssLoader.style.top = `-100vh`;
+            loader(false)
         },3000
     )
-    form.style.transform = `translateY(-100vh)`;
-    body.style.overflow = `auto`;
 
     e.target.disabled = true;
     e.target.background = `rgb(153, 82, 106)`;

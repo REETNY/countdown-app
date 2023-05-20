@@ -68,6 +68,7 @@ body{
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-end;
+    position: relative;
 }
 
 .addTimer{
@@ -353,7 +354,7 @@ span{
 /* loader */
 
 .loading{
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     position: absolute;
     display: flex;
@@ -361,6 +362,7 @@ span{
     align-items: center;
     z-index: 99999;
     top: -100vh;
+    right: 0;
     background: black;
 }
 
@@ -597,3 +599,18 @@ span{
     }
 }
   
+
+footer{
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  color: whitesmoke;
+}
+
+.right{
+  font-size: 14px;
+  font-weight: 700;
+}
