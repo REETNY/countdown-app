@@ -7,6 +7,8 @@ const timerDate = document.querySelector("#timerDate");
 const body = document.body;
 const userName = document.querySelector("#userName");
 
+const cssLoader = document.querySelector(".loading")
+
 //images array container
 let bGArray = ["github.jpg", "github2.jpg", "github3.jpg", "github4.jpg", "github5.jpg"]
 
@@ -238,6 +240,7 @@ function checkLs() {
 // check for a submit click
 submit.addEventListener("click", async(e) => {
 
+    cssLoader.style.top = `0vh`
     
     let userDate = timerDate.value;
     let userTimerName = timerName.value;
@@ -250,7 +253,14 @@ submit.addEventListener("click", async(e) => {
         backDrop: await getBackground(userTimerName)
     }
 
+
+
     addDateToLS(datas);
+    setTimeout(
+        () => {
+            cssLoader.style.top = `-100vh`;
+        },3000
+    )
     form.style.transform = `translateY(-100vh)`;
     body.style.overflow = `auto`;
 
@@ -266,7 +276,7 @@ submit.addEventListener("click", async(e) => {
 async function getBackground(text){
     try{
         const myKey = `D5Uuj8BTp5wUzFEBuZ2hBxrN9M6op4MyZHS3puOwCO0`;
-        const serverResponse = await fetch(`https://api.unsplash.com/search/photos?query=${text}&client_id=`+myKey);
+        const serverResponse = await fetch(`https://api.unsplash.com/search/photos?query=${text.toLowerCase()}&client_id=`+myKey);
         const resp = await serverResponse.json();
         const data = resp.results[0].urls.small;
         return(data);
